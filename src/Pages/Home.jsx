@@ -1,10 +1,6 @@
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 const Home = () => {
-  return (
-    <div>
-      <Link to="/Starred">Go to starred</Link>
-    </div>
-  );
+  return <div>HOME</div>;
 };
 export default Home;
