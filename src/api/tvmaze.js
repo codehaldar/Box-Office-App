@@ -6,3 +6,4 @@ const Getapi = async queryString => {
   return body;
 };
 export const searchForShows = query => Getapi(`/search/shows?q=${query}`);
+export const searchForPeople = query => Getapi(`/search/people?q=${query}`);
