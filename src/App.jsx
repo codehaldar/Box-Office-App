@@ -3,18 +3,22 @@ import Home from './Pages/Home';
 import Starred from './Pages/Starred';
 import MainLayout from './components/MainLayout';
 import Show from './Pages/Show';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/starred" element={<Starred />} />
-        </Route>
-        <Route path="*" element={<div>Not Found</div>} />
-        <Route path="/show/:ShowId" element={<Show />} />
-        {/* <Route path="/" element={<App />}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/starred" element={<Starred />} />
+          </Route>
+          <Route path="*" element={<div>Not Found</div>} />
+          <Route path="/show/:ShowId" element={<Show />} />
+          {/* <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="teams" element={<Teams />}>
             <Route path=":teamId" element={<Team />} />
@@ -27,8 +31,9 @@ function App() {
           <Route path="/tos" element={<Tos />} />
         </Route>
         <Route path="contact-us" element={<Contact />} />  */}
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
