@@ -18,6 +18,7 @@ function App() {
           </Route>
           <Route path="*" element={<div>Not Found</div>} />
           <Route path="/show/:ShowId" element={<Show />} />
+
           {/* <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="teams" element={<Teams />}>
