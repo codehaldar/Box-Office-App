@@ -6,12 +6,14 @@ import SearchForm from '../components/SearchForm';
 import ActorsGrid from '../components/actors/ActorsGrid';
 import ShowGrid from '../components/shows/ShowGrid';
 import { useQuery } from 'react-query';
+
 const Home = () => {
   // const [apiData, setApiData] = useState(null);
   // const [apiDataError, setApiDataError] = useState(null);
   // //console.log(searchOptions);
 
   const [filter, setFilter] = useState(null);
+
   const { data: apiData, error: apiDataError } = useQuery({
     queryKey: ['search', filter],
     queryFn: () =>
@@ -43,6 +45,7 @@ const Home = () => {
   return (
     <div>
       <SearchForm onSearch={onSearch} />
+
       <div>{renderApiData()}</div>
     </div>
   );
