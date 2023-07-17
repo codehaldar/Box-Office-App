@@ -1,37 +1,8 @@
-import { useEffect, useReducer } from 'react';
 import ShowCard from './ShowCard';
-const usePersistedReducer = (reducer, initialState, localStorageKey) => {
-  const [state, dispatch] = useReducer(reducer, initialState, initial => {
-    const persistedValue = localStorage.getItem(localStorageKey);
-    return persistedValue ? JSON.parse(persistedValue) : initial;
-  });
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(state));
-  }, [state, localStorageKey]);
-  return [state, dispatch];
-};
+import { useStarredShows } from '../../lib/useStarredShows';
 
-// {type: "star", showId: ""}
-// {type: "unstar", showId: ""}
-
-const starredShowReducer = (currentStarred, action) => {
-  switch (action.type) {
-    case 'STAR':
-      return currentStarred.concat(action.ShowId);
-    case 'UNSTAR':
-      return currentStarred.filter(ele => ele !== action.ShowId);
-
-    default:
-      return currentStarred;
-  }
-};
 const ShowGrid = ({ shows }) => {
-  const [starredShows, dispatchStarred] = usePersistedReducer(
-    starredShowReducer,
-    [],
-    'starredShows'
-  );
-
+  const [starredShows, dispatchStarred] = useStarredShows();
   const onStarredClicked = ShowId => {
     const isStarred = starredShows.includes(ShowId);
     if (isStarred) {
@@ -51,6 +22,7 @@ const ShowGrid = ({ shows }) => {
           summary={data.show.summary}
           img={data.show.image ? data.show.image.medium : '/img_not_found.png'}
           onStarredClicked={onStarredClicked}
+          isStarred={starredShows.includes(data.show.id)}
         />
       ))}
     </div>
