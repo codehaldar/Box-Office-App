@@ -4,7 +4,7 @@ const ActorsCard = ({ name, country, img, gender, birthday }) => {
   return (
     <SearchCard>
       <SearchImgWrapper>
-        <img src={img} alt={name}></img>
+        <img src={img ? img : 'img_not_found.png'} alt={name}></img>
       </SearchImgWrapper>
       <h1>
         {name} {!!gender && `( ${gender} )`}
