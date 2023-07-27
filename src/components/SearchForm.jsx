@@ -1,15 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchStr } from '../lib/useSearchStr';
+import CustomRadio from './CustomRadio';
 const SearchForm = ({ onSearch }) => {
   const [searchStr, setSearchStr] = useSearchStr();
   const [searchOptions, setSearchOptions] = useState('shows');
 
-  useEffect(() => {
-    console.log('subham');
-    return () => {
-      console.log('Before the next ', searchOptions);
-    };
-  }, [searchOptions]);
   const onSearchInputChange = ev => {
     setSearchStr(ev.target.value);
   };
@@ -27,26 +22,25 @@ const SearchForm = ({ onSearch }) => {
   return (
     <form onSubmit={onSubmit}>
       <input type="text" value={searchStr} onChange={onSearchInputChange} />
-      <label>
-        Shows
-        <input
-          type="radio"
-          name="search-options"
-          value="shows"
-          checked={searchOptions === 'shows'}
-          onChange={onRadioChange}
-        />
-      </label>
-      <label>
-        Actors
-        <input
-          type="radio"
-          name="search-options"
-          value="actors"
-          checked={searchOptions === 'actors'}
-          onChange={onRadioChange}
-        />
-      </label>
+
+      <CustomRadio
+        label="Shows"
+        type="radio"
+        name="search-options"
+        value="shows"
+        checked={searchOptions === 'shows'}
+        onChange={onRadioChange}
+      />
+
+      <CustomRadio
+        label="Actors"
+        type="radio"
+        name="search-options"
+        value="actors"
+        checked={searchOptions === 'actors'}
+        onChange={onRadioChange}
+      />
+
       <button type="submit">Search</button>
     </form>
   );
